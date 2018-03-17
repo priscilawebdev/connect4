@@ -1,47 +1,35 @@
-import Button from 'components/Button'
-import TextField from 'components/TextField'
-import { Component, h } from 'preact'
+import * as React from 'react'
+import { connect } from 'react-redux'
+import { actions, IAuth } from 'ducks/auth'
+import Welcome from './Welcome'
+import Game from './Game'
 
-interface IHomeState {
-	userName: string
+interface IHomeProps {
+  handleSetUserName: (name: string) => void,
+  auth: IAuth
 }
 
-export class Home extends Component<{}, IHomeState> {
-	public state: IHomeState = {
-		userName: ''
-	}
+const Home: React.SFC<IHomeProps> = ({ auth: { name }, handleSetUserName }) => (
+  <div className='Home'>
+    <h1 className='Home__title'>
+      Connect 4
+    </h1>
+    <div className='Home__content'>
+      {!name ? (
+        <Welcome onStartGame={handleSetUserName} />
+      ): (
+        <Game />
+      )}
+    </div>
+  </div>
+)
 
-	public handleChangeName = (event: any) => {
-		this.setState({ userName: event.target.value })
-	}
+const mapStateToProps = state => ({
+  auth: state.auth
+})
 
-	public handleKeyPress = (event: any) => {
-		console.log(event)
-	}
-
-	public render() {
-		const { userName } = this.state
-		return (
-			<div className='Home'>
-				<h1 className='Home__title'>{'Connect 4'}</h1>
-				<div class='Home__content'>
-					<TextField
-						name='userName'
-						placeholder='Name'
-						onChange={this.handleChangeName}
-						onKeyPress={this.handleKeyPress}
-						value={userName}
-						fullWidth
-					/>
-					<Button
-						label='Start'
-						onClick={() => console.log('wait...')}
-						primary
-					/>
-				</div>
-			</div>
-		)
-	}
+const mapDispatchToProps = {
+  handleSetUserName: actions.setUserName
 }
 
-export default Home
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

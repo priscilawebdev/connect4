@@ -8,11 +8,11 @@
     "removeComments": true,
     "sourceMap": true,
     "jsx": "react",
-    "jsxFactory": "h",
     "baseUrl": "./src",
     "paths": {
       "components": ["./src/components"],
-      "utils": ["./src/utils"]
+      "utils": ["./src/utils"],
+      "ducks": ["./src/ducks"]
     }
   },
   "include": ["./src/**/*.tsx", "./src/**/*.ts"]

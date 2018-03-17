@@ -3,10 +3,19 @@
   "extends": ["tslint:latest", "tslint-react"],
   "jsRules": {},
   "rules": {
-    "whitespace": [true, "check-branch", "check-preblock"],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-preblock",
+      "check-type-operator",
+      "check-rest-spread",
+      "check-type",
+      "check-typecast",
+      "check-module"
+    ],
     "trailing-comma": [false, { "multiline": "always", "singleline": "never" }],
     "semicolon": [true, "never"],
-    "indent": [true, "tabs", 2],
+    "indent": [true],
     "quotemark": [
       true,
       "single",
@@ -17,7 +26,15 @@
     "no-implicit-dependencies": false,
     "no-submodule-imports": false,
     "no-console": [false, "log", "error"],
+    "align": [false],
+    "object-literal-sort-keys": false,
+    "no-string-literal": false,
+    "arrow-parens": false,
+    "member-access": false,
+    "ordered-imports": false,
+    "jsx-no-multiline-js": false,
     "jsx-boolean-value": false,
+    "jsx-alignment": false,
     "jsx-no-lambda": false
   },
   "rulesDirectory": [],

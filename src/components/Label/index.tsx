@@ -1,4 +1,4 @@
-import { h } from 'preact'
+import * as React from 'react'
 import { bm } from 'utils/bem'
 
 interface ILabelProps {

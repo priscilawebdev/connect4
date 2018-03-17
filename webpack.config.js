@@ -7,7 +7,10 @@ module.exports = (__, args) => ({
     rules: [
       {
         test: /\.tsx?$/,
-        use: [{ loader: "ts-loader" }, { loader: "baggage-loader?index.sass" }]
+        use: [
+          { loader: "ts-loader" },
+          { loader: "baggage-loader?index.sass" }
+        ]
       },
       {
         test: /\.sass?$/,
@@ -30,15 +33,16 @@ module.exports = (__, args) => ({
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./public/index.html",
-      filename: "./index.html"
+      template: "public/index.html",
+      favicon: "public/favicon.ico"
     })
   ],
   resolve: {
     extensions: [".js", ".json", ".ts", ".tsx"],
     alias: {
       components: path.resolve(__dirname, "src/components"),
-      utils: path.resolve(__dirname, "src/utils")
+      utils: path.resolve(__dirname, "src/utils"),
+      ducks: path.resolve(__dirname, "src/ducks"),
     }
   }
-});
+})
