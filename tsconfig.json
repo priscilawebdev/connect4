@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "target": "es5",
+    "module": "commonjs",
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "jsx": "react",
+    "jsxFactory": "h",
+    "baseUrl": "./src",
+    "paths": {
+      "components": ["./src/components"],
+      "utils": ["./src/utils"]
+    }
+  },
+  "include": ["./src/**/*.tsx", "./src/**/*.ts"]
+}

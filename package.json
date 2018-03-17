@@ -1,0 +1,40 @@
+{
+  "name": "connect4",
+  "version": "1.0.0",
+  "description": "Board Game",
+  "main": "index.js",
+  "repository": "git@github.com:priscilawebdev/connect4.git",
+  "author": "Priscila Oliveira <priscilawebdev@gmail.com>",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "dev": "webpack-dev-server --mode development --open",
+    "prod": "webpack --mode production",
+    "lint": "tslint src/**/*.tsx -t verbose",
+    "precommit": "npm run lint"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "preact": "^8.2.7",
+    "preact-router": "^2.6.0",
+    "ts-loader": "^4.0.1",
+    "typescript": "^2.7.2"
+  },
+  "devDependencies": {
+    "@types/node": "^9.4.7",
+    "baggage-loader": "^1.0.0",
+    "css-loader": "^0.28.10",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.0.6",
+    "husky": "^0.14.3",
+    "node-sass": "^4.7.2",
+    "prettier": "1.11.1",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "tslint": "^5.9.1",
+    "tslint-react": "^3.5.1",
+    "webpack": "next",
+    "webpack-cli": "^2.0.11",
+    "webpack-dev-server": "^3.1.1"
+  }
+}

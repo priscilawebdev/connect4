@@ -1,0 +1,38 @@
+.Button
+  position: relative
+  cursor: pointer
+  display: inline-block
+  transition: all .15s
+  border: 0
+  border-radius: 3px
+  min-height: 33px
+  padding: 2px 18px
+  line-height: 29px
+  font-size: 13px
+  font-weight: 600
+  text-decoration: none
+  text-align: center
+  align-items: flex-start
+  user-select: none
+  white-space: nowrap
+  background: #fff
+  color: #2f273c
+  &--primary
+    color: #ffffff
+    background: #F0AC00
+  &--center
+    display: block
+    margin-left: auto
+    margin-right: auto
+  &--disabled
+    content: ''
+    position: absolute
+    top: 0
+    right: 0
+    left: 0
+    bottom: 0
+    cursor: default
+    display: block
+    background: white
+    opacity: .6
+    transition: all .15s

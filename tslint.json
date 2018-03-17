@@ -1,0 +1,25 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:latest", "tslint-react"],
+  "jsRules": {},
+  "rules": {
+    "whitespace": [true, "check-branch", "check-preblock"],
+    "trailing-comma": [false, { "multiline": "always", "singleline": "never" }],
+    "semicolon": [true, "never"],
+    "indent": [true, "tabs", 2],
+    "quotemark": [
+      true,
+      "single",
+      "avoid-escape",
+      "jsx-single",
+      "avoid-template"
+    ],
+    "no-implicit-dependencies": false,
+    "no-submodule-imports": false,
+    "no-console": [false, "log", "error"],
+    "jsx-boolean-value": false,
+    "jsx-no-lambda": false
+  },
+  "rulesDirectory": [],
+  "exclude": ["node_modules"]
+}
