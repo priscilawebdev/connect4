@@ -17,7 +17,7 @@ export interface IWelcomeState {
   }
 }
 
-export class Welcome extends React.Component<IWelcomeProps, IWelcomeState> {
+class Welcome extends React.Component<IWelcomeProps, IWelcomeState> {
   state: IWelcomeState = {
     valid: false,
     fields: {

@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { actions, IAuth } from 'ducks/auth'
-import Welcome from './Welcome'
-import Game from './Game'
+import Welcome from '../Welcome'
+import Game from '../Game'
 
 interface IHomeProps {
   handleSetUserName: (name: string) => void,
