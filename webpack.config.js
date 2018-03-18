@@ -17,7 +17,13 @@ module.exports = (__, args) => ({
         use: [
           { loader: "style-loader" },
           { loader: "css-loader" },
-          { loader: "sass-loader" }
+          { loader: "sass-loader" },
+          {
+            loader: "sass-resources-loader",
+            options: {
+              resources: 'src/utils/styles/index.sass',
+            }
+          }
         ]
       },
       {
