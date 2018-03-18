@@ -1,15 +1,17 @@
 import React, { SFC } from 'react'
 import { connect } from 'react-redux'
-import { actions, IAuth } from 'ducks/auth'
+import { actions as AuthActions, IAuth } from 'ducks/auth'
+import { IGame } from 'ducks/game'
 import Welcome from '../Welcome'
 import Game from '../Game'
 
 interface IHomeProps {
   handleSetUserName: (name: string) => void,
-  auth: IAuth
+  auth: IAuth,
+  game: IGame
 }
 
-const Home: SFC<IHomeProps> = ({ auth: { name }, handleSetUserName }) => (
+const Home: SFC<IHomeProps> = ({ auth: { name }, handleSetUserName, game }) => (
   <div className='Home'>
     <h1 className='Home__title'>
       Connect 4
@@ -18,18 +20,19 @@ const Home: SFC<IHomeProps> = ({ auth: { name }, handleSetUserName }) => (
       {!name ? (
         <Welcome onStartGame={handleSetUserName} />
       ): (
-        <Game />
+        <Game game={game} />
       )}
     </div>
   </div>
 )
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  game: state.game
 })
 
 const mapDispatchToProps = {
-  handleSetUserName: actions.setUserName
+  handleSetUserName: AuthActions.setUserName
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
