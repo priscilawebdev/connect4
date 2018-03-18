@@ -8,8 +8,7 @@ interface IButtonProps {
 	primary?: boolean
 	center?: boolean
 	className?: string[]
-	// React.FormEvent<HtmlInputElement> does not exit in preact :/
-	onClick: (event: any) => void
+	onClick: (event: React.FormEvent<HTMLButtonElement>) => void
 }
 
 const Button = ({
