@@ -3,6 +3,8 @@
     "outDir": "./dist",
     "target": "es5",
     "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "noImplicitAny": false,
     "noUnusedLocals": true,
     "removeComments": true,

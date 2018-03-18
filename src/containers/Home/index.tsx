@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { SFC } from 'react'
 import { connect } from 'react-redux'
 import { actions, IAuth } from 'ducks/auth'
 import Welcome from '../Welcome'
@@ -9,7 +9,7 @@ interface IHomeProps {
   auth: IAuth
 }
 
-const Home: React.SFC<IHomeProps> = ({ auth: { name }, handleSetUserName }) => (
+const Home: SFC<IHomeProps> = ({ auth: { name }, handleSetUserName }) => (
   <div className='Home'>
     <h1 className='Home__title'>
       Connect 4
