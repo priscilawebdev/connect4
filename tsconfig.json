@@ -13,6 +13,7 @@
     "baseUrl": "./src",
     "paths": {
       "components": ["./src/components"],
+      "containers": ["./src/containers"],
       "utils": ["./src/utils"],
       "ducks": ["./src/ducks"]
     }
