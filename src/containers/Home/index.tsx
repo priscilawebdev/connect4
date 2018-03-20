@@ -13,10 +13,10 @@ interface IHomeProps {
 
 const Home: SFC<IHomeProps> = ({ auth: { name }, handleSetUserName, game }) => (
   <div className='Home'>
-    <h1 className='Home__title'>
+    <h1 className='Home-title'>
       Connect 4
     </h1>
-    <div className='Home__content'>
+    <div className='Home-content'>
       {!name ? (
         <Welcome onStartGame={handleSetUserName} />
       ): (

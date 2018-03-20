@@ -28,7 +28,7 @@ export const be = (
 	modifiers?: string | { [key: string]: boolean },
 	utilities: string[] = []
 ): string =>
-	`${applyModifiers(`${block}__${element}`, modifiers)} ${utilities.join(' ')}`
+	`${applyModifiers(`${block}-${element}`, modifiers)} ${utilities.join(' ')}`
 
 export const bm = (
 	block: string,
