@@ -1,22 +1,37 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
-    "target": "es2016",
+    "outDir": "dist",
     "module": "commonjs",
+    "target": "es6",
+    "lib": ["es6", "dom"],
+    "sourceMap": true,
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "noImplicitAny": false,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "removeComments": true,
-    "sourceMap": true,
-    "jsx": "react",
-    "baseUrl": "./src",
+    "baseUrl": "src",
     "paths": {
-      "components": ["./src/components"],
-      "containers": ["./src/containers"],
-      "utils": ["./src/utils"],
-      "ducks": ["./src/ducks"]
+      "components": ["components"],
+      "containers": ["containers"],
+      "utils": ["utils"],
+      "ducks": ["ducks"]
     }
   },
-  "include": ["./src/**/*.tsx", "./src/**/*.ts"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "public",
+    "webpack.config.js",
+    "global.d.ts"
+  ]
 }
