@@ -1,14 +1,13 @@
 import React from 'react'
 import Circle from 'components/Circle'
-
 import { IGame } from 'ducks/game'
 
 interface IGameProps {
   game: IGame,
-  handleSetScore: (position: number) => void
+  handleSetScore: (position: number) => { type: string, position: number }
 }
 
-class Game extends React.Component<IGameProps, null> {
+class Game extends React.Component<IGameProps, {}> {
   render() {
     const { game: { matrix, userCurrentPlayer }, handleSetScore } = this.props
     return (
@@ -25,7 +24,7 @@ class Game extends React.Component<IGameProps, null> {
               key={index}
               onClick={() => handleSetScore(index)}
               primary={item === 1}
-              secondary={item === 0}
+              secondary={item === 2}
             />
           ))}
         </div>

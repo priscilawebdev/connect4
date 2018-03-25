@@ -1,12 +1,22 @@
-const IInitialState = {
-  name: null
-}
+import { Reducer } from 'redux'
 
 export interface IAuth {
-  name: boolean
+  name: string
 }
 
-export default function reducer(state: IAuth = IInitialState, { type, name }): IAuth {
+const InitialState = {
+  name: ''
+}
+
+export const actions = {
+  SET_USER_NAME: 'SET_USER_NAME',
+  setUserName: (name: string) => ({
+    type: actions.SET_USER_NAME,
+    name
+  })
+}
+
+const reducer: Reducer<IAuth> = (state: IAuth = InitialState, { type, name }) => {
   switch (type) {
     case actions.SET_USER_NAME:
       return {
@@ -18,10 +28,4 @@ export default function reducer(state: IAuth = IInitialState, { type, name }): I
   }
 }
 
-export const actions = {
-  SET_USER_NAME: 'SET_USER_NAME',
-  setUserName: name => ({
-    type: actions.SET_USER_NAME,
-    name
-  })
-}
+export default reducer

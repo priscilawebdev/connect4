@@ -13,12 +13,12 @@ interface IButtonProps {
 
 const Button = ({
 	type = 'text',
-	label,
-	onClick,
-	fullWidth,
-	primary,
-	center,
-	className = []
+	fullWidth = false,
+	primary = false,
+	center = false,
+  label,
+  onClick,
+  className = [],
 }: IButtonProps) => (
 	<button
 		className={bm('Button', { primary, center, fullWidth }, className)}

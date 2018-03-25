@@ -6,13 +6,13 @@ import Welcome from '../Welcome'
 import Game from '../Game'
 
 interface IHomeProps {
-  handleSetUserName: (name: string) => void,
-  handleSetScore: (position: number) => void,
+  handleSetUserName: (name: string) => { type: string, name: string },
+  handleSetScore: (position: number) => { type: string, position: number },
   auth: IAuth,
   game: IGame
 }
 
-const Home: SFC<IHomeProps> = ({ auth: { name }, handleSetUserName, game, handleSetScore }) => (
+const Home: SFC<IHomeProps> = ({ auth: { name }, handleSetUserName, ...props }) => (
   <div className='Home'>
     <div className='Home-container'>
       <h1 className='Home-title'>
@@ -22,17 +22,14 @@ const Home: SFC<IHomeProps> = ({ auth: { name }, handleSetUserName, game, handle
         {!name ? (
           <Welcome onStartGame={handleSetUserName} />
         ): (
-          <Game
-            game={game}
-            handleSetScore={handleSetScore}
-          />
+          <Game {...props} />
         )}
       </div>
     </div>
   </div>
 )
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: { auth: IAuth, game: IGame }) => ({
   auth: state.auth,
   game: state.game
 })

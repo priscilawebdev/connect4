@@ -8,8 +8,8 @@ interface ICircleProps {
 }
 
 const Circle = ({
-  primary,
-  secondary,
+  primary = false,
+  secondary = false,
   onClick
 }: ICircleProps) => <div className={bm('Circle', { primary, secondary })} onClick={onClick} />
 

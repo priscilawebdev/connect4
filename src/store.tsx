@@ -12,7 +12,7 @@ const store = createStore(
   reducer,
   compose(
     applyMiddleware(thunk),
-    window['devToolsExtension'] ? window['devToolsExtension']() : (f) => f
+    (window as any)['devToolsExtension'] ? (window as any)['devToolsExtension']() : (f: any) => f
   )
 )
 

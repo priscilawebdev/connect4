@@ -1,19 +1,32 @@
+import { Reducer } from 'redux'
+
 export interface IGame {
   matrix: number[],
   userCurrentPlayer: boolean,
-  score: string[number]
+  score: number[]
 }
 
-const IInitialState = {
-  matrix: Array<number>(42).fill(null),
+const InitialState = {
+  matrix: Array<number>(42).fill(0),
   userCurrentPlayer: false,
   score: [0, 0]
 }
 
-export default function reducer(state = IInitialState, { payload, type, position }) {
+export const actions = {
+  SET_SCORE: 'SET_SCORE',
+  SET_WINNER: 'SET_WINNER',
+  SET_DRAW: 'SET_DRAW',
+  RESET: 'RESET',
+  setScore: (position: number) => ({
+    type: actions.SET_SCORE,
+    position
+  })
+}
+
+const reducer: Reducer<IGame> = (state: IGame = InitialState, { type, position }) => {
   switch (type) {
     case actions.SET_SCORE:
-      const currentPLayer = state.userCurrentPlayer ? 1 : 0
+      const currentPLayer = state.userCurrentPlayer ? 1 : 2
       return {
         ...state,
         matrix: state.matrix.map((item, index) => index === position ? currentPLayer : item),
@@ -24,13 +37,4 @@ export default function reducer(state = IInitialState, { payload, type, position
   }
 }
 
-export const actions = {
-  SET_SCORE: 'SET_SCORE',
-  SET_WINNER: 'SET_WINNER',
-  SET_DRAW: 'SET_DRAW',
-  RESET: 'RESET',
-  setScore: position => ({
-    type: actions.SET_SCORE,
-    position
-  })
-}
+export default reducer

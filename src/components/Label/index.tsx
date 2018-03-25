@@ -11,12 +11,12 @@ interface ILabelProps {
 }
 
 const Label = ({
-	label,
-	inlineBlock,
-	required,
-  uppercase,
-  bold,
-	className = []
+	inlineBlock = false,
+	required = false,
+  uppercase = false,
+  bold = false,
+	className = [],
+  label
 }: ILabelProps) => (
 	<div className={bm('Label', { inlineBlock, required, uppercase, bold }, className)}>
 		{label}

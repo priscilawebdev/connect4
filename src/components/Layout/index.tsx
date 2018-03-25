@@ -1,7 +1,10 @@
 import React from 'react'
 import { be, bm } from 'utils/bem'
 
-const Layout = ({ children }) => (
+interface ILayout {
+  children: JSX.Element
+}
+const Layout = ({ children }: ILayout) => (
   <div className={bm('Layout')}>
     <div className={be('Layout', 'container')}>
       {children}
