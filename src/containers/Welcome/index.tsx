@@ -1,23 +1,28 @@
-import * as React from 'react'
+import React, { ChangeEvent, KeyboardEvent } from 'react'
 import Button from 'components/Button'
 import Label from 'components/Label'
 import TextField from 'components/TextField'
+
+type Fields = 'name'
+type Required = {
+  [key in Fields]: string
+}
 
 interface IWelcomeProps {
   onStartGame: (name: string) => void
 }
 
-export interface IWelcomeState {
-  valid: boolean,
-  fields: {
-    name: string
-  },
-  errors: {
-    name: string
-  }
+interface IString {
+  name: string
 }
 
-export class Welcome extends React.Component<IWelcomeProps, IWelcomeState> {
+export interface IWelcomeState {
+  valid: boolean,
+  fields: IString,
+  errors: IString
+}
+
+class Welcome extends React.Component<IWelcomeProps, IWelcomeState> {
   state: IWelcomeState = {
     valid: false,
     fields: {
@@ -28,7 +33,7 @@ export class Welcome extends React.Component<IWelcomeProps, IWelcomeState> {
     }
   }
 
-  handleChange = name => event => {
+  handleChange = (name: string) => (event: ChangeEvent<HTMLInputElement>) => {
     this.setState({
       fields: {
         ...this.state.fields,
@@ -37,26 +42,26 @@ export class Welcome extends React.Component<IWelcomeProps, IWelcomeState> {
     }, () => this.validate('name'))
   }
 
-  handleKeyPress = event => {
-    if (event.key.name === 'Enter') {
+  handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
       this.handleStartGame()
     }
   }
 
   validate = (name?: string) => {
     const { fields, errors } = this.state
-    const newErros = errors
+    const newErros: Required = errors
     const requiredFields = ['name']
     if (name) {
-      requiredFields.forEach((field) => {
+      requiredFields.forEach((field: Fields) => {
         newErros[field] = !fields[field] && field === name ? 'Field is required' : ''
       })
     } else {
-      requiredFields.forEach((field) => {
+      requiredFields.forEach((field: Fields) => {
         newErros[field] = !fields[field] ? 'Field is required' : ''
       })
     }
-    const isInvalid = Object.keys(newErros).some(field =>  newErros[field].trim().length > 0)
+    const isInvalid = Object.keys(newErros).some((field: Fields) =>  newErros[field].trim().length > 0)
 
     this.setState({
       valid: !isInvalid,

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { KeyboardEvent, ChangeEvent } from 'react'
 import { be, bm } from 'utils/bem'
 
 interface ITextFieldProps {
@@ -8,8 +8,8 @@ interface ITextFieldProps {
 	fullWidth?: boolean
 	placeholder?: string
   error: string
-	onChange: (event: React.FormEvent<HTMLInputElement>) => void
-	onKeyPress?: (event: React.FormEvent<HTMLInputElement>) => void
+	onChange: (event: ChangeEvent<HTMLInputElement>) => void
+	onKeyPress?: (event: KeyboardEvent<HTMLInputElement>) => void
 }
 
 const TextField = ({
@@ -18,7 +18,7 @@ const TextField = ({
 	onChange,
   value,
 	onKeyPress,
-	fullWidth,
+	fullWidth = false,
 	placeholder,
   error = ''
 }: ITextFieldProps) => (

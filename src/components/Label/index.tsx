@@ -1,20 +1,24 @@
-import * as React from 'react'
+import React from 'react'
 import { bm } from 'utils/bem'
 
 interface ILabelProps {
 	label: string
 	inlineBlock?: boolean
 	required?: boolean
+  uppercase?: boolean
+  bold?: boolean
 	className?: string[]
 }
 
 const Label = ({
-	label,
-	inlineBlock,
-	required,
-	className = []
+	inlineBlock = false,
+	required = false,
+  uppercase = false,
+  bold = false,
+	className = [],
+  label
 }: ILabelProps) => (
-	<div className={bm('Label', { inlineBlock, required }, className)}>
+	<div className={bm('Label', { inlineBlock, required, uppercase, bold }, className)}>
 		{label}
 	</div>
 )

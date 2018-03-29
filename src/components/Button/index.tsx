@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { bm } from 'utils/bem'
 
 interface IButtonProps {
@@ -8,18 +8,17 @@ interface IButtonProps {
 	primary?: boolean
 	center?: boolean
 	className?: string[]
-	// React.FormEvent<HtmlInputElement> does not exit in preact :/
-	onClick: (event: any) => void
+	onClick: (event: React.FormEvent<HTMLButtonElement>) => void
 }
 
 const Button = ({
 	type = 'text',
-	label,
-	onClick,
-	fullWidth,
-	primary,
-	center,
-	className = []
+	fullWidth = false,
+	primary = false,
+	center = false,
+  label,
+  onClick,
+  className = [],
 }: IButtonProps) => (
 	<button
 		className={bm('Button', { primary, center, fullWidth }, className)}

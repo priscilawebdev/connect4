@@ -47,6 +47,7 @@ module.exports = (__, args) => ({
     extensions: [".js", ".json", ".ts", ".tsx"],
     alias: {
       components: path.resolve(__dirname, "src/components"),
+      containers: path.resolve(__dirname, "src/containers"),
       utils: path.resolve(__dirname, "src/utils"),
       ducks: path.resolve(__dirname, "src/ducks"),
     }
