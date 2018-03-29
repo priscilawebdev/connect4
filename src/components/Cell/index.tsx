@@ -1,16 +1,16 @@
 import React from 'react'
 import { bm } from 'utils/bem'
 
-interface ICircleProps {
+interface ICellProps {
   primary?: boolean
   secondary?: boolean
   onClick?: () => void
 }
 
-const Circle = ({
+const Cell = ({
   primary = false,
   secondary = false,
   onClick
-}: ICircleProps) => <div className={bm('Circle', { primary, secondary })} onClick={onClick} />
+}: ICellProps) => <div className={bm('Cell', { primary, secondary })} onClick={onClick} />
 
-export default Circle
+export default Cell
