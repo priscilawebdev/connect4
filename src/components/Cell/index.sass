@@ -3,18 +3,72 @@
   width: 60px
   padding: 4px
   cursor: pointer
+  position: relative
   &:before
     content: ''
     display: block
     height: 100%
     border-radius: 50%
     background: $white
+    transition: background 400ms ease-out
+  &--primary
+    &:before
+      background: $pink
+  &--secondary
+    &:before
+      background: $secondary
+  &--heading
+    top: -4px
+    &:before
+      background: $gray-light
+    &:after
+      content: ''
+      display: block
+      height: 52px
+      border-radius: 50%
+      position: absolute
+      top: 4px
+      width: 52px
+      left: 50%
+      transform: translateX(-50%)
+      visibility: hidden
+      transition: background 400ms ease-out
+  &--disabled
+    pointer-events: none
+    cursor: default
+  &-inner
+    border-radius: 50%
+    position: absolute
+    left: 50%
+    height: 52px
+    width: 52px
+    transition: top 400ms ease-out
+    transform: translateX(-50%)
+    visibility: hidden
+    &--drop
+      visibility: visible
+    &--top4
+      top: 4px
+    &--top68
+      top: 68px
+    &--top128
+      top: 128px
+    &--top188
+      top: 188px
+    &--top248
+      top: 248px
+    &--top308
+      top: 308px
+    &--top368
+      top: 368px
 
-.Cell--primary
-  &:before
-    background: $pink
-.Cell--secondary
-  &:before
-    background: $secondary
-.Cell--disabled
-  pointer-events: none
+.Cell--primary .Cell-inner
+  background: $pink
+.Cell--secondary .Cell-inner
+  background: $secondary
+.Cell--primary.Cell--heading:after
+  background: $pink
+.Cell--secondary.Cell--heading:after
+  background: $secondary
+.Cell--heading.Cell--disabled.Cell--heading:after
+  background: $gray-light
