@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { bm } from 'utils/bem'
 
-const Col = ({ children }: any) => (
-  <div className={bm('Col')}>{children}</div>
-)
+interface IColProps {
+  children: ReactNode
+}
+
+const Col = ({
+ children
+}: IColProps) => <div className={bm('Col')}>{children}</div>
 
 export default Col
