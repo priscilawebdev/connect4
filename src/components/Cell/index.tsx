@@ -7,7 +7,8 @@ interface ICellProps {
   disabled?: boolean
   heading?: boolean
   col: number
-  onClick: (col: number, row: number) => { type: string, position: { col: number, row: number } }
+  row: number
+  onClick: (col: number, row: number) => void
   matrix: number[][]
 }
 
@@ -37,7 +38,7 @@ class Cell extends Component<ICellProps, ICellState> {
     new Promise((resolve) => {
       setTimeout(() => {
         this.setState(initialState, () => resolve())
-      }, 400)
+      }, 330)
     })
   )
 
