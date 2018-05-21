@@ -1,28 +1,32 @@
 .Game
   position: relative
   height: 100%
-  &-heading
+  &-info
     text-align: center
-    padding: 0 0 20px 0
+    padding: 0 0 10px 0
+  &-heading
+    height: 60px
+    padding: 0 10px
+    position: relative
+    z-index: 1
+  &-subheading
+    position: absolute
+    display: flex
+    height: calc(380px + 60px)
   &-info
     font-weight: 600
     text-align: center
     span
       color: $secondary
+      margin: 0 0 0 5px
   &-content
     padding: 10px
     display: flex
     justify-content: center
+    flex-wrap: wrap
     position: relative
-    &:before
-      content: ''
-      position: absolute
-      width: 100%
-      height: calc(100% - 66px)
-      background: $primary
-      border-radius: 5px
-      top: 66px
-
+    background: $primary
+    border-radius: 5px
   &-footer
     display: flex
     align-items: center

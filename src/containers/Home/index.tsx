@@ -1,19 +1,27 @@
 import React, { SFC } from 'react'
 import { connect } from 'react-redux'
 import { actions as AuthActions, IAuth } from 'ducks/auth'
-import { actions as GameActions, IGame } from 'ducks/game'
+import { actions as GameActions, IGame, TStatus } from 'ducks/game'
 import Welcome from '../Welcome'
 import Game from '../Game'
 
 interface IHomeProps {
-  handleSetUserName: (name: string) => { type: string, name: string },
-  handleSetScore: (col: number, row: number) => { type: string, position: { col: number, row: number } },
-  handleResetGame: () => { type: string },
-  auth: IAuth,
+  handleSetUserName: (name: string) => { type: string, name: string }
+  handleSetScore: (row: number, col: number, status: TStatus) => {
+    type: string, move: { col: number, row: number, status: TStatus }
+  }
+  handleResetGame: () => { type: string }
+  auth: IAuth
   game: IGame
 }
 
-const Home: SFC<IHomeProps> = ({ auth: { name }, handleSetUserName, game, handleSetScore, handleResetGame }) => (
+const Home: SFC<IHomeProps> = ({
+  auth: { name },
+  handleSetUserName,
+  game,
+  handleSetScore,
+  handleResetGame
+}) => (
   <div className='Home'>
     <div className='Home-container'>
       <h1 className='Home-title'>
@@ -23,7 +31,11 @@ const Home: SFC<IHomeProps> = ({ auth: { name }, handleSetUserName, game, handle
         {!name ? (
           <Welcome onStartGame={handleSetUserName} />
         ): (
-          <Game game={game} onSetScore={handleSetScore} onResetGame={handleResetGame} />
+          <Game
+            game={game}
+            onSetScore={handleSetScore}
+            onResetGame={handleResetGame}
+          />
         )}
       </div>
     </div>

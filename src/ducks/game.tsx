@@ -1,6 +1,6 @@
 import { Reducer } from 'redux'
 
-export type TStatus = 'initial' | 'running' | 'winner' | 'draw'
+export type TStatus = 'thinking' | 'running' | 'winner' | 'draw'
 
 export interface IGame {
   matrix: number[][],
@@ -9,43 +9,33 @@ export interface IGame {
 }
 
 const InitialState: IGame = {
-  matrix: Array<number>(7).fill(0).map(() => Array<number>(7).fill(0)),
+  matrix: Array<number>(6).fill(0).map(() => Array<number>(7).fill(0)),
   player: 1,
-  status: 'initial'
+  status: 'running'
 }
 
 export const actions = {
   SET_SCORE: 'SET_SCORE',
-  SET_STATUS: 'SET_STATUS',
   RESET: 'RESET',
-  setScore: (col: number, row: number) => ({
+  setScore: (row: number, col: number, status: TStatus) => ({
     type: actions.SET_SCORE,
-    position: { col, row }
-  }),
-  setStatus: (status: TStatus) => ({
-    type: actions.SET_STATUS,
-    status
+    move: { row, col, status }
   }),
   reset: () => ({
     type: actions.RESET
   })
 }
 
-const reducer: Reducer<IGame> = (state = InitialState, { type, position, status }) => {
+const reducer: Reducer<IGame> = (state = InitialState, { type, move }) => {
   switch (type) {
     case actions.SET_SCORE:
       const matrix = JSON.parse(JSON.stringify(state.matrix))
-      matrix[position.col][position.row] = state.player
+      matrix[move.row][move.col] = state.player
       return {
         ...state,
         matrix,
-        player: state.player === 1 ? 2 : 1,
-        status: 'running'
-      }
-    case actions.SET_STATUS:
-      return {
-        ...state,
-        status
+        status: move.status,
+        player: state.player === 1 ? 2 : 1
       }
     case actions.RESET:
       return InitialState
