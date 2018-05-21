@@ -27,6 +27,10 @@ module.exports = (__, args) => ({
         ]
       },
       {
+        test: /\.(jpe?g|png|gif|svg|mp4)$/i,
+        loader: 'file-loader'
+      },
+      {
         test: /\.html$/,
         use: [
           {
@@ -49,7 +53,7 @@ module.exports = (__, args) => ({
       components: path.resolve(__dirname, "src/components"),
       containers: path.resolve(__dirname, "src/containers"),
       utils: path.resolve(__dirname, "src/utils"),
-      ducks: path.resolve(__dirname, "src/ducks"),
+      ducks: path.resolve(__dirname, "src/ducks")
     }
   }
 })
