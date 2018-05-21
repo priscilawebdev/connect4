@@ -1,7 +1,11 @@
 .Col
   display: flex
-  flex-direction: column
+  height: 100%
+  cursor: pointer
   &:hover
     .Cell--heading
       &:after
         visibility: visible
+  &--disabled
+    pointer-events: none
+    cursor: default

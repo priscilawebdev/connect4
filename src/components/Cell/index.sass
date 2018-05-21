@@ -17,7 +17,6 @@
     &:before
       background: $secondary
   &--heading
-    top: -4px
     &:before
       transition: background .4s ease-out
       background: $gray-light
@@ -33,9 +32,6 @@
       transform: translateX(-50%)
       visibility: hidden
       transition: background .4s ease-out
-  &--disabled
-    pointer-events: none
-    cursor: default
   &-inner
     border-radius: 50%
     position: absolute
@@ -45,30 +41,28 @@
     transition: top 400ms ease-out
     transform: translateX(-50%)
     visibility: hidden
-    &--drop
-      visibility: visible
-    &--top4
-      top: 4px
-    &--top68
-      top: 68px
-    &--top128
-      top: 128px
-    &--top188
-      top: 188px
-    &--top248
-      top: 248px
-    &--top308
-      top: 308px
-    &--top368
-      top: 368px
 
 .Cell--primary .Cell-inner
   background: $pink
 .Cell--secondary .Cell-inner
   background: $secondary
+.Cell--drop.Cell--heading .Cell-inner
+  visibility: visible
 .Cell--primary.Cell--heading:after
   background: $pink
 .Cell--secondary.Cell--heading:after
   background: $secondary
-.Cell--heading.Cell--disabled.Cell--heading:after
-  background: $gray-light
+.Cell--top4.Cell--heading .Cell-inner
+  top: 4px
+.Cell--top74.Cell--heading .Cell-inner
+  top: 74px
+.Cell--top134.Cell--heading .Cell-inner
+  top: 134px
+.Cell--top194.Cell--heading .Cell-inner
+  top: 194px
+.Cell--top254.Cell--heading .Cell-inner
+  top: 254px
+.Cell--top314.Cell--heading .Cell-inner
+  top: 314px
+.Cell--top374.Cell--heading .Cell-inner
+  top: 374px
