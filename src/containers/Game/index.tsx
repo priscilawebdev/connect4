@@ -75,8 +75,8 @@ class Game extends Component<IGameProps, IGameState> {
     const check: ICheck = { matrix: tempMatrix, row, col, player }
 
     return new Promise(resolve => {
-      if (this.checkHorizontal(check) || this.checkVertical(check) ||
-        this.checkForwardSlash(check) || this.checkBackSlash(check)) {
+      if (this.checkHorizontal(check) || this.checkVertical(check)
+        || this.checkForwardSlash(check) || this.checkBackSlash(check)) {
         resolve('winner')
       } else if (this.checkDraw(check)) {
         resolve('draw')
@@ -122,55 +122,75 @@ class Game extends Component<IGameProps, IGameState> {
     return result
   }
 
-  checkForwardSlash = ({ matrix, player }: ICheck): boolean => {
-    let row = this.numRows - 1
-    let col = 0
-    const minRowDiagonal = 3
-    const maxColumnDiagonal = 3
+  checkForwardSlash = ({ matrix, player, row, col }: ICheck): boolean => {
     let result = false
 
-    while (row >= minRowDiagonal) {
-      while (col <= maxColumnDiagonal) {
-        if (row - 3 >= 0 && col + 3 < this.numCols) {
-          const winner = this.getWinner(
-            matrix, [[row, col], [row - 1, col + 1], [row - 2, col + 2], [row - 3, col + 3]], player
-          )
-          if (winner) {
-            result = true
-            break
-          }
+    if (row + col <= 5) {
+      let x = 0
+      let y = col + row
+      while (y >= 3) {
+        const winner = this.getWinner(
+          matrix, [[x, y], [x + 1, y - 1], [x + 2, y - 2], [x + 3, y - 3]], player
+        )
+        if (winner) {
+          result = true
+          break
         }
-        col++
+        y--
+        x++
       }
-      row--
-      col = 0
+    } else {
+      let x = (col + row) - 6
+      let y = 6
+      while (x <= 2) {
+        const winner = this.getWinner(
+          matrix, [[x, y], [x + 1, y - 1], [x + 2, y - 2], [x + 3, y - 3]], player
+        )
+        if (winner) {
+          result = true
+          break
+        }
+        y--
+        x++
+      }
     }
+
     return result
   }
 
-  checkBackSlash = ({ matrix, player }: ICheck): boolean => {
-    let row = 0
-    let col = 0
-    const maxRowDiagonal = 2
-    const maxColumnDiagonal = 3
+  checkBackSlash = ({ matrix, player, row, col }: ICheck): boolean => {
     let result = false
 
-    while (row <= maxRowDiagonal) {
-      while (col <= maxColumnDiagonal) {
-        if (row + 3 < this.numRows && col + 3 < this.numCols) {
-          const winner = this.getWinner(
-            matrix, [[row, col], [row + 1, col + 1], [row + 2, col + 2], [row + 3, col + 3]], player
-          )
-          if (winner) {
-            result = true
-            break
-          }
+    if (col <= 5) {
+      let x = row - col
+      let y = 0
+      while (x <= 2) {
+        const winner = this.getWinner(
+          matrix, [[x, y], [x + 1, y + 1], [x + 2, y + 2], [x + 3, y + 3]], player
+        )
+        if (winner) {
+          result = true
+          break
         }
-        col++
+        y++
+        x++
       }
-      row++
-      col = 0
+    } else {
+      let x = 0
+      let y = col - row
+      while (y <= 3) {
+        const winner = this.getWinner(
+          matrix, [[x, y], [x + 1, y + 1], [x + 2, y + 2], [x + 3, y + 3]], player
+        )
+        if (winner) {
+          result = true
+          break
+        }
+        y++
+        x++
+      }
     }
+
     return result
   }
 
