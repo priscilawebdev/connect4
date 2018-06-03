@@ -3,12 +3,14 @@ import Cell from 'components/Cell'
 import Col from 'components/Col'
 import Button from 'components/Button'
 import { IGame, TStatus } from 'ducks/game'
+import SoundDrop from './sounds/drop.mp3'
+import SoundOver from './sounds/game-over.mp3'
+import SoundWinner from './sounds/winner.mp3'
 
 interface IGameProps {
   game: IGame
-  onSetScore: (row: number, col: number, status: TStatus) => {
-    type: string, move: { col: number, row: number, status: TStatus }
-  }
+  onSetScore: (row: number, col: number) => { type: string, move: { col: number, row: number } }
+  onSetStatus: (status: TStatus) => { type: string, status: TStatus }
   onResetGame: () => { type: string }
 }
 
@@ -30,21 +32,37 @@ const initialState = (props: IGameProps) => {
 }
 
 class Game extends Component<IGameProps, IGameState> {
-  readonly numRows = 6
-  readonly numCols = 7
+  dropSound: HTMLAudioElement
+  gameOver: HTMLAudioElement
+  gameHasWinner: HTMLAudioElement
 
   constructor(props: IGameProps) {
     super(props)
     this.state = initialState(props)
+    this.dropSound = new Audio(SoundDrop)
+    this.gameOver = new Audio(SoundOver)
+    this.gameHasWinner = new Audio(SoundWinner)
   }
 
-  async handleDrop(col: number) {
-    const { onSetScore } = this.props
-    const row = this.getRow(col)
-    const status = await this.checkForWin(row, col)
-    await this.dropCircle(row, col)
-    await this.resetState()
-    onSetScore(row, col, status as TStatus)
+  handleDrop = (col: number) => () => {
+   const { onSetStatus, onSetScore } = this.props
+   const row = this.getRow(col)
+
+   return (async () => {
+      await onSetStatus('thinking')
+      const status = await this.checkForWin(row, col)
+      await this.dropCircle(row, col)
+      await this.resetState()
+      await onSetScore(row, col)
+      await onSetStatus(status as TStatus)
+    })()
+  }
+
+  handleReset = () => {
+    const { onResetGame } = this.props
+    this.gameOver.pause()
+    this.gameOver.currentTime = 0
+    onResetGame()
   }
 
   dropCircle = (row: number, col: number) => {
@@ -52,9 +70,12 @@ class Game extends Component<IGameProps, IGameState> {
     const headingClone = JSON.parse(JSON.stringify(heading))
     headingClone[col] = ((row + 1) * 60) + 14
     return new Promise(resolve => (
-      this.setState({
-        heading: headingClone
-      }, () => resolve())
+      this.setState(
+        { heading: headingClone },
+        () =>
+          this.dropSound.play()
+            .then(() => resolve())
+      )
     ))
   }
 
@@ -75,10 +96,12 @@ class Game extends Component<IGameProps, IGameState> {
     const check: ICheck = { matrix: tempMatrix, row, col, player }
 
     return new Promise(resolve => {
-      if (this.checkHorizontal(check) || this.checkVertical(check)
-        || this.checkForwardSlash(check) || this.checkBackSlash(check)) {
+      if (this.checkHorizontal(check) || this.checkVertical(check) ||
+        this.checkBackSlash(check) || this.checkForwardSlash(check)) {
+        this.gameOver.play()
         resolve('winner')
       } else if (this.checkDraw(check)) {
+        this.gameHasWinner.play()
         resolve('draw')
       } else {
         resolve('running')
@@ -242,7 +265,7 @@ class Game extends Component<IGameProps, IGameState> {
   }
 
   render() {
-    const { game: { matrix, player, status }, onResetGame } = this.props
+    const { game: { matrix, player, status } } = this.props
     const { heading } = this.state
     return (
       <div className='Game'>
@@ -254,8 +277,8 @@ class Game extends Component<IGameProps, IGameState> {
             {heading.map((cell, cellIndex) => (
               <Col
                 key={cellIndex}
-                disabled={cell !== 4 || status === 'winner'}
-                onClick={() => this.handleDrop(cellIndex)}
+                disabled={cell !== 4 || status !== 'running'}
+                onClick={this.handleDrop(cellIndex)}
               >
                 <Cell
                   primary={player === 1}
@@ -282,7 +305,7 @@ class Game extends Component<IGameProps, IGameState> {
           ))}
         </div>
         <div className='Game-footer'>
-          <Button label='Reset Game' onClick={onResetGame} primary />
+          <Button label='Reset Game' onClick={this.handleReset} primary />
         </div>
       </div>
     )

@@ -16,17 +16,22 @@ const InitialState: IGame = {
 
 export const actions = {
   SET_SCORE: 'SET_SCORE',
+  SET_STATUS: 'SET_STATUS',
   RESET: 'RESET',
-  setScore: (row: number, col: number, status: TStatus) => ({
+  setStatus: (status: TStatus) => ({
+    type: actions.SET_STATUS,
+    status
+  }),
+  setScore: (row: number, col: number) => ({
     type: actions.SET_SCORE,
-    move: { row, col, status }
+    move: { row, col }
   }),
   reset: () => ({
     type: actions.RESET
   })
 }
 
-const reducer: Reducer<IGame> = (state = InitialState, { type, move }) => {
+const reducer: Reducer<IGame> = (state = InitialState, { type, move, status }) => {
   switch (type) {
     case actions.SET_SCORE:
       const matrix = JSON.parse(JSON.stringify(state.matrix))
@@ -36,6 +41,11 @@ const reducer: Reducer<IGame> = (state = InitialState, { type, move }) => {
         matrix,
         status: move.status,
         player: state.player === 1 ? 2 : 1
+      }
+    case actions.SET_STATUS:
+      return {
+        ...state,
+        status
       }
     case actions.RESET:
       return InitialState

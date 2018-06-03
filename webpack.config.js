@@ -27,8 +27,10 @@ module.exports = (__, args) => ({
         ]
       },
       {
-        test: /\.(jpe?g|png|gif|svg|mp4)$/i,
-        loader: 'file-loader'
+        test: /\.(jpe?g|png|gif|svg|mp3)$/i,
+        use: [
+          { loader: "file-loader" }
+        ]
       },
       {
         test: /\.html$/,
@@ -48,7 +50,7 @@ module.exports = (__, args) => ({
     })
   ],
   resolve: {
-    extensions: [".js", ".json", ".ts", ".tsx"],
+    extensions: [".js", ".json", ".ts", ".tsx", ".mp3"],
     alias: {
       components: path.resolve(__dirname, "src/components"),
       containers: path.resolve(__dirname, "src/containers"),

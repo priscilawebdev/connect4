@@ -7,9 +7,8 @@ import Game from '../Game'
 
 interface IHomeProps {
   handleSetUserName: (name: string) => { type: string, name: string }
-  handleSetScore: (row: number, col: number, status: TStatus) => {
-    type: string, move: { col: number, row: number, status: TStatus }
-  }
+  handleSetScore: (row: number, col: number) => { type: string, move: { col: number, row: number } }
+  handleSetStatus: (status: TStatus) => { type: string, status: TStatus },
   handleResetGame: () => { type: string }
   auth: IAuth
   game: IGame
@@ -17,8 +16,9 @@ interface IHomeProps {
 
 const Home: SFC<IHomeProps> = ({
   auth: { name },
-  handleSetUserName,
   game,
+  handleSetUserName,
+  handleSetStatus,
   handleSetScore,
   handleResetGame
 }) => (
@@ -35,6 +35,7 @@ const Home: SFC<IHomeProps> = ({
             game={game}
             onSetScore={handleSetScore}
             onResetGame={handleResetGame}
+            onSetStatus={handleSetStatus}
           />
         )}
       </div>
@@ -50,7 +51,8 @@ const mapStateToProps = (state: { auth: IAuth, game: IGame }) => ({
 const mapDispatchToProps = {
   handleSetUserName: AuthActions.setUserName,
   handleSetScore: GameActions.setScore,
-  handleResetGame: GameActions.reset
+  handleResetGame: GameActions.reset,
+  handleSetStatus: GameActions.setStatus
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
