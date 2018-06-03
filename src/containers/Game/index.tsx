@@ -184,7 +184,7 @@ class Game extends Component<IGameProps, IGameState> {
   checkBackSlash = ({ matrix, player, row, col }: ICheck): boolean => {
     let result = false
 
-    if (col <= 5) {
+    if ((5 - row) + col <= 5) {
       let x = row - col
       let y = 0
       while (x <= 2) {
